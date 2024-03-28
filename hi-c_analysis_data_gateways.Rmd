@@ -1,0 +1,96 @@
+---
+title: "Data Gateways: Accessing Public Hi-C Data Portals"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+### Data Gateways: Accessing Public Hi-C Data Portals
+The objective of this notebook is to develop working knowledge of accessing Hi-C datasets from:
+1) 4DN Consortium
+2) DNA Zoo Project
+
+# Load packages and objects
+```{r}
+library(ggplot2)
+library(GenomicRanges)
+library(InteractionSet)
+library(HiCExperiment)
+library(fourDNData)
+library(DNAZooData)
+library(rtracklayer)
+```
+## 4DN Data Portal: 4D Nucleome Data Coordination and Integration Center (DCIC)
+
+Use fourDNData() function to access gateway to 4DN-hosted Hi-C files.
+```{r}
+library(fourDNData)
+head(fourDNData())
+```
+
+# Query individual files with specific file parameters.
+```{r}
+cf <- fourDNData(experimentSetAccession = '4DNESJNPEKZD', type = 'mcool')
+```
+
+This will download and cache any queried files locally.
+```{r}
+cf
+availableChromosomes(cf)
+availableResolutions(cf)
+import(cf, focus = "chr4:10000001-20000000", resolution = 5000)
+```
+
+To fetch a specific Hi-C file type, such as 'pairs', use the 'type' argument.
+```{r}
+pairs_f <- fourDNData(experimentSetAccession = '4DNESJNPEKZD', type = 'pairs') 
+print(pairs_f)
+import(pairs_f)
+```
+
+For type = 'insulation', this fetches a .bigwig track file. This track type corresponds to a genome-wide insulation score. Once fetched from the 4DN portal, local files can be imported in R.
+```{r}
+library(rtracklayer)
+fourDNData(experimentSetAccession = '4DNES25ABNZ1', type = 'insulation') |> 
+    import(as = 'Rle')
+```
+
+For type = 'boundaries', it fetches a .bed file which lists annotated borders between topological domains. This file type can also be imported in R and will generate a GRanges object.
+```{r}
+fourDNData(experimentSetAccession = '4DNES25ABNZ1', type = 'boundaries') |> 
+    import()
+```
+
+For type = 'compartments', this will fetch a .bigwig track file. This track corresponds to a selected genome-wide eigenvector computed by cooltools, which represents A/B compartments.
+```{r}
+fourDNData(experimentSetAccession = '4DNES25ABNZ1', type = 'compartments') |> 
+    import()
+```
+
+# Query complete experiment datasets
+Instead of importing multiple files individually for each single experimentSet accession ID, we can import all available files simultaneously using fourDNHiCEperiment().
+```{r}
+hic <- fourDNHiCExperiment('4DNESJNPEKZD')
+```
+This aggregates all the components into a single HiCExperiment object with topologicalFeatures and metadata slots.
+```{r}
+metadata(hic)
+```
+## DNA Zoo
+The DNA Zoo Consortium is a data portal maintained by a group who aims to correct and refine genome assemblies using Hi-C approaches. The DNAZooData() function from the similarly titled package provides a gateway to their Hi-C files.
+```{r}
+library(DNAZooData)
+head(DNAZooData())
+```
+Fetching a Hi-C dataset generated from a tardigrade sample.
+```{r}
+hicfile <- DNAZooData(species = 'Hypsibius_dujardini')
+hicfile
+```
+We can check the metadata in the HicFile parsed from the DNA Zoo portal.
+```{r}
+metadata(hicfile)$organism
+```
+
+
+
