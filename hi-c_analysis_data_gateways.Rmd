@@ -1,6 +1,6 @@
 ---
 title: "Data Gateways: Accessing Public Hi-C Data Portals"
-# output: rmarkdown::github_document
+# output: github_document
 editor_options: 
   chunk_output_type: inline
 ---
