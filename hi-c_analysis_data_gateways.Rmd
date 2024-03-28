@@ -3,6 +3,7 @@ title: "Data Gateways: Accessing Public Hi-C Data Portals"
 author: Vinson Zeng
 date: March 28, 2024
 output: github_document
+html_preview: false
 ---
 ```{r}
 install.packages("rmarkdown")
