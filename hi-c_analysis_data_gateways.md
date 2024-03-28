@@ -3,12 +3,11 @@ Data Gateways: Accessing Public Hi-C Data Portals
 Vinson Zeng
 March 28, 2024
 
-### Data Gateways: Accessing Public Hi-C Data Portals
-
 The objective of this notebook is to develop working knowledge of
-accessing Hi-C datasets from: 1) 4DN Consortium 2) DNA Zoo Project
+accessing Hi-C datasets from:<br> 1) 4DN Consortium<br> 2) DNA Zoo
+Project
 
-# Load packages and objects
+#### Load packages and objects
 
 ``` r
 library(ggplot2)
@@ -178,7 +177,7 @@ head(fourDNData())
     ## 6       https://4dn-open-data-public.s3.amazonaws.com/fourfront-webprod/wfoutput/d1f4beb9-701f-4188-abe2-6271fe658770/4DNFIXKKNMS7.bw
     ## 7       https://4dn-open-data-public.s3.amazonaws.com/fourfront-webprod/wfoutput/3d429647-51c8-4e3a-a18b-eec0b1480905/4DNFIN13N8C1.bw
 
-# Query individual files with specific file parameters.
+#### Query individual files with specific file parameters.
 
 ``` r
 cf <- fourDNData(experimentSetAccession = '4DNESJNPEKZD', type = 'mcool')
@@ -370,7 +369,7 @@ fourDNData(experimentSetAccession = '4DNES25ABNZ1', type = 'compartments') |>
     ##   -------
     ##   seqinfo: 21 sequences from an unspecified genome
 
-# Query complete experiment datasets
+#### Query complete experiment datasets
 
 Instead of importing multiple files individually for each single
 experimentSet accession ID, we can import all available files
