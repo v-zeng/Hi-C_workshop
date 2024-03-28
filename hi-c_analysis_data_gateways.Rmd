@@ -1,9 +1,12 @@
 ---
 title: "Data Gateways: Accessing Public Hi-C Data Portals"
-# output: github_document
-editor_options: 
-  chunk_output_type: inline
+author: Vinson Zeng
+date: March 28, 2024
+output: github_document
 ---
+```{r}
+install.packages("rmarkdown")
+```
 
 ### Data Gateways: Accessing Public Hi-C Data Portals
 The objective of this notebook is to develop working knowledge of accessing Hi-C datasets from:
