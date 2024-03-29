@@ -1,0 +1,13 @@
+---
+title: "Workflow 3: Inter-centromere interactions in yeast"
+author: Vinson Zeng
+date: March 28, 2024
+output: github_document
+---
+
+The objective of this notebook is to develop working knowledge of:<br>
+1) How to compute P(s) from several samples and compare them<br>
+2) How to compute distance-adjusted correlation between Hi-C datasets with `HiCRep`<br>
+3) How to perform differential interaction analysis between Hi-C datasets with `multiHiCcompare`
+
+#### Load packages and objects
