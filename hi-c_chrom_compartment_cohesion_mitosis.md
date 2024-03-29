@@ -3,8 +3,8 @@ Workflow 2: Chromosome compartment cohesion upon mitosis entry
 Vinson Zeng
 March 28, 2024
 
-The objective of this notebook is to develop working knowledge
-of:<br> 1) Annotate compartments for a list of HiC experiments<br> 2)
+The objective of this notebook is to develop working knowledge of how
+to:<br> 1) Annotate compartments for a list of HiC experiments<br> 2)
 Generate saddle plots for a list of HiC experiments<br> 3) Quantify
 changes in interactions between compartments between different
 timepoints
@@ -205,7 +205,8 @@ plot_grid(plotlist = pl, nrow = 1)
 ```
 
 ![](hi-c_chrom_compartment_cohesion_mitosis_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
-\ <br>
+![Figure 1. Chromosome 3 matrices for G2, 5’, 10’, 15’,
+30’.](workflow2_chrom_matrices.png)
 
 ### Zoom in on a specific chromosome section
 
@@ -282,6 +283,9 @@ plot_grid(
     ## Using alpha for a discrete variable is not advised.
 
 ![](hi-c_chrom_compartment_cohesion_mitosis_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![Figure 2. Autocorrelation matrix for G2, 5’, and 30’
+timepoints.](workflow2_hi-c_autocorrelation_matrices.png)
+
 Autocorrelation coefficients of gene frequencies at a particular given
 distance are proportional to the kinship at that distance. The
 correlation matrices above indicate two different patterns of chromatin
@@ -303,8 +307,16 @@ Group non-overlapping genomic windows typically between 10 and 50 bins
 according to A/B compartment eigenvector value (lowest = strongest B
 compartments, highest = strongest A compartments)
 
-`pl <- imap(hics, ~ plotSaddle(.x, nbins = 38, BPPARAM = bpparam) + ggtitle(.y))  plot_grid(plotlist = pl, nrow = 1)`
-![Saddle plots for observed vs expected G2](workflow2_g2_saddleplot.png)<br>
+`pl <- imap(hics, ~ plotSaddle(.x, nbins = 38, BPPARAM = bpparam) + ggtitle(.y))`
+
+`plot_grid(plotlist = pl, nrow = 1)`
+
+<figure>
+<img src="workflow2_g2_saddleplot.png"
+alt="Figure 3. Saddle plots for observed vs expected G2." />
+<figcaption aria-hidden="true">Figure 3. Saddle plots for observed vs
+expected G2.</figcaption>
+</figure>
 
 The saddle plots above are congruent with the observations made for chr.
 4, in which intra-B compartments interactions appear to be lost 5 min
@@ -383,6 +395,10 @@ ggplot(df, aes(x = type, y = OE, group = type, fill = type)) +
     ## (`stat_boxplot()`).
 
 ![](hi-c_chrom_compartment_cohesion_mitosis_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![Figure 4. Boxplots for changes in observed vs expected scores for
+intra-A, intra-B, A-B, and B-A interactions by
+timepoint.](workflow2_boxplots_observed_vs_expected_AB.png)
+
 The boxplots indicate that the interactions between genomic loci for the
 B compartment degrade more rapidly than those of the A compartment after
 cells are released from G2 and begin to enter mitosis.
