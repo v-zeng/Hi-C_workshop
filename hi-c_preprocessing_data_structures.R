@@ -1,6 +1,15 @@
 ### Workshop: Orchestrating Hi-C analysis with Bioconductor
 ## Part 1: Preprocessing Hi-C Data
 ## Part 2: Investigating Hi-C data structures in R
+#======================================================
+# The purpose of this notebook is to investigate the four of the main classes
+# leveraged by Bioconductor in Hi-C analyses, their structures and how to
+# interact with them.
+# These classes include:
+#   1. GRanges
+#   2. GInteractions
+#   3. ContactFile
+#   4. HiCExperiment
 #=======================================================
 
 
