@@ -98,30 +98,7 @@ hic[c('II', 'III', 'IV')]
 The term "zooming" refers to dynamically changing the resolution of a HiCExperiment. The `zoom` function only works for multi-resolution contact matrices (e.g. `.mcool` or `.hic`) and it does not change the `focus`. It only affects the `resolution` and `interactions`.
 ```{r}
 hic
-# `HiCExperiment` object with 306,212 contacts over 257 regions 
-# -------
-# fileName: "/home/scatsac/.cache/R/ExperimentHub/283eb5e62932f_7752" 
-# focus: "II:300,001-813,184" 
-# resolutions(5): 1000 2000 4000 8000 16000
-# active resolution: 2000 
-# interactions: 18513 
-# scores(2): count balanced 
-# topologicalFeatures: compartments(0) borders(0) loops(0) viewpoints(0) 
-# pairsFile: N/A 
-# metadata(0):
-
 zoom(hic, 4000)
-# `HiCExperiment` object with 306,212 contacts over 129 regions 
-# -------
-# fileName: "/home/scatsac/.cache/R/ExperimentHub/283eb5e62932f_7752" 
-# focus: "II:300,001-813,184" 
-# resolutions(5): 1000 2000 4000 8000 16000
-# active resolution: 4000 
-# interactions: 6800 
-# scores(2): count balanced 
-# topologicalFeatures: compartments(0) borders(0) loops(0) viewpoints(0) 
-# pairsFile: N/A 
-# metadata(0):
 ```
 
 #### Updating a `HiCExperiment` object
@@ -153,16 +130,6 @@ topologicalFeatures(hic, 'CTCF') <- GRanges(c(
     "II:9240-9252" 
 ))
 topologicalFeatures(hic, 'CTCF')
-# GRanges object with 4 ranges and 0 metadata columns:
-#       seqnames    ranges strand
-#          <Rle> <IRanges>  <Rle>
-#   [1]       II   340-352      *
-#   [2]       II 3520-3532      *
-#   [3]       II 7980-7992      *
-#   [4]       II 9240-9252      *
-#   -------
-#   seqinfo: 1 sequence from an unspecified genome; no seqlengths
-# 
 
 topologicalFeatures(hic, 'loops') <- GInteractions(
     topologicalFeatures(hic, 'CTCF')[rep(1:3, each = 3)],
@@ -170,37 +137,9 @@ topologicalFeatures(hic, 'loops') <- GInteractions(
 )
 topologicalFeatures(hic, 'loops')
 
-# GInteractions object with 9 interactions and 0 metadata columns:
-#       seqnames1   ranges1     seqnames2   ranges2
-#           <Rle> <IRanges>         <Rle> <IRanges>
-#   [1]        II   340-352 ---        II   340-352
-#   [2]        II   340-352 ---        II 3520-3532
-#   [3]        II   340-352 ---        II 7980-7992
-#   [4]        II 3520-3532 ---        II   340-352
-#   [5]        II 3520-3532 ---        II 3520-3532
-#   [6]        II 3520-3532 ---        II 7980-7992
-#   [7]        II 7980-7992 ---        II   340-352
-#   [8]        II 7980-7992 ---        II 3520-3532
-#   [9]        II 7980-7992 ---        II 7980-7992
-#   -------
-#   regions: 3 ranges and 0 metadata columns
-#   seqinfo: 1 sequence from an unspecified genome; no seqlengths
-
 #=== adding pairsFile after importing ContactFile into a HiCExperiment object
 pairsf <- HiContactsData('yeast_wt', 'pairs.gz')
 pairsFile(hic) <- pairsf
-# hic
-# `HiCExperiment` object with 306,212 contacts over 257 regions 
-# -------
-# fileName: "/home/scatsac/.cache/R/ExperimentHub/283eb5e62932f_7752" 
-# focus: "II:300,001-813,184" 
-# resolutions(5): 1000 2000 4000 8000 16000
-# active resolution: 2000 
-# interactions: 18513 
-# scores(2): count balanced 
-# topologicalFeatures: compartments(0) borders(0) loops(9) viewpoints(0) CTCF(4) 
-# pairsFile: /home/scatsac/.cache/R/ExperimentHub/283eb379aa82f_7753 
-# metadata(0):
 
 #=== update metadata for a HiCExperiment
 metadata(hic) <- list(
@@ -208,11 +147,6 @@ metadata(hic) <- list(
     date = date()
 )
 metadata(hic)
-# $info
-# [1] "HiCExperiment created from an example .mcool file from `HiContactsData`"
-# 
-# $date
-# [1] "Fri Mar 29 20:58:31 2024"
 ```
 
 #### Coercing `HiCExperiment` objects
@@ -226,66 +160,21 @@ Coercing functions allow for transformation of data stored as a `HiCExperiment` 
 ```{r}
 #=== `as.matrix` coerces into dense matrix by default
 as.matrix(hic) |> class()
-# [1] "dgTMatrix"
-# attr(,"package")
-# [1] "Matrix"
 
 as.matrix(hic) |> dim()
-# [1] 257 257
 
 #=== specify scores to be used when coercing into a matrix
 as.matrix(hic, use.scores = "balanced")[1:5, 1:5]
-# 5 x 5 sparse Matrix of class "dgTMatrix"
-#                                                             
-# [1,] 0.009657438 0.07662234 0.05410199 0.04294051 0.04090521
-# [2,] 0.076622340 0.05128277 0.09841564 0.06926737 0.05263611
-# [3,] 0.054101992 0.09841564 0.05657589 0.08723160 0.07316890
-# [4,] 0.042940512 0.06926737 0.08723160 0.03699543 0.08403496
-# [5,] 0.040905212 0.05263611 0.07316890 0.08403496 0.04787415
 
 as.matrix(hic, use.scores = "count")[1:5, 1:5]
-# 5 x 5 sparse Matrix of class "dgTMatrix"
-#                        
-# [1,]  7  92  75  61  38
-# [2,] 92 102 226 163  81
-# [3,] 75 226 150 237 130
-# [4,] 61 163 237 103 153
-# [5,] 38  81 130 153  57
 
 #=== for a spare matrix, include sparse = TRUE
 as.matrix(hic, use.scores = "count", sparse = TRUE)[1:5, 1:5]
-# 5 x 5 sparse Matrix of class "dgTMatrix"
-#                        
-# [1,]  7  92  75  61  38
-# [2,] 92 102 226 163  81
-# [3,] 75 226 150 237 130
-# [4,] 61 163 237 103 153
-# [5,] 38  81 130 153  57
 ```
 
 Coercing `interactions` into a data frame (rectangular).
 ```{r}
 as.data.frame(hic) |> head()
-#    seqnames1 start1   end1 width1 strand1 bin_id1    weight1 center1
-#  1        II 300001 302000   2000       *     266 0.03714342  301000
-#  2        II 300001 302000   2000       *     266 0.03714342  301000
-#  3        II 300001 302000   2000       *     266 0.03714342  301000
-#  4        II 300001 302000   2000       *     266 0.03714342  301000
-#  5        II 300001 302000   2000       *     266 0.03714342  301000
-#  6        II 300001 302000   2000       *     266 0.03714342  301000
-#    seqnames2 start2   end2 width2 strand2 bin_id2    weight2 center2 count
-#  1        II 300001 302000   2000       *     266 0.03714342  301000     7
-#  2        II 302001 304000   2000       *     267 0.02242258  303000    92
-#  3        II 304001 306000   2000       *     268 0.01942093  305000    75
-#  4        II 306001 308000   2000       *     269 0.01895202  307000    61
-#  5        II 308001 310000   2000       *     270 0.02898098  309000    38
-#  6        II 310001 312000   2000       *     271 0.01834118  311000    43
-#       balanced    random
-#  1 0.009657438 0.7227776
-#  2 0.076622340 0.4908796
-#  3 0.054101992 0.8696518
-#  4 0.042940512 0.1918134
-#  5 0.040905212 0.5860512
-#  6 0.029293930 0.5564170
+
 ```
 
