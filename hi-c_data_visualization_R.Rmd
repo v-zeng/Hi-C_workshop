@@ -1,0 +1,45 @@
+---
+title: "Hi-C Data Visualization"
+author: Vinson Zeng
+date: March 29, 2024
+output: github_document
+---
+
+The objective of this notebook is to review working knowledge the visualization tools in R offered by:<br>
+1) `HiContacts`<br>
+2) `HiCExperiment`
+
+#### Load packages and objects
+```{r}
+library(ggplot2)
+library(GenomicRanges)
+library(InteractionSet)
+library(HiCExperiment)
+library(HiContactsData)
+library(HiContacts)
+library(rtracklayer)
+```
+
+#### Single map
+
+Disk-stored Hi-C contact matrices can be visualized by importing the interactions of interest over a genomic location into a `HiCExperiment` object, followed by using `plotMatrix` from `HiContacts`.
+```{r}
+#=== generate example hic object
+# create HiCExperiment object from example .cool file in HiContactsData package
+
+# download `.mcool` file and cache locally
+coolf <- HiContactsData('yeast_wt', 'mcool')
+
+# create connection to disk-stored `.mcool` file
+cf <- CoolFile(coolf)
+cf
+
+# import contacts from chromosome V at a resolution of 2000
+hic <- import(cf, focus = 'V', resolution = 2000)
+
+# plot the matrix
+plotMatrix(hic)
+```
+
+#### Horizontal map
+
