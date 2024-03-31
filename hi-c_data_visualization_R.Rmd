@@ -41,6 +41,8 @@ hic <- import(cf, focus = 'V', resolution = 2000)
 # plot the matrix
 plotMatrix(hic)
 ```
+![Figure 1. Example contact matrix](example_single_map.png)
+
 
 #### Horizontal map
 
@@ -48,6 +50,7 @@ A horizontal style Hi-C map can be generated when providing a `maxDistance` argu
 ```{r}
 plotMatrix(hic, maxDistance = 200000)
 ```
+![Figure 2. Example horizontal style Hi-C map.](sample_horizontalmap.png)
 
 #### Side-by-side maps
 
@@ -63,6 +66,7 @@ hic2 <- import(
 #=== plot 2 matrices side by side - top right will be first matrix, bottom left will be second matrix
 plotMatrix(hic, compare.to = hic2)
 ```
+![Figure 3. Example side-by-side Hi-C samples map.](side_by_side_map.png)
 
 #### Plot multiple chromosomes
 
@@ -77,6 +81,8 @@ Step 1.
 full_hic <- import(cf, resolution = 4000)
 plotMatrix(full_hic)
 ```
+![Figure 4. Example full contact matrix parse.](multiple_chrom_plot.png)
+
 
 Steps 2 and 3.
 
@@ -85,6 +91,8 @@ Steps 2 and 3.
 hic_subset <- full_hic[c("II", "III", "IV")]
 plotMatrix(hic_subset)
 ```
+![Figure 5. Example subset Hi-C heatmap with chromosomes of interest.](multiple_chrom_interest_plot.png)
+
 
 ### Hi-C maps customization options
 
@@ -100,10 +108,14 @@ The `plotMatrix` function has several customization options:
 # plot count scores (un-normalized raw contact counts obtained from binning a .pairs file)
 plotMatrix(hic, use.scores = 'count')
 ```
+![Figure 6. Example of Hi-C map with un-normalized raw contact counts.](hic_map_scores_example.png)
+
 ```{r}
 # choose a scale by providing the `limits` argument
 plotMatrix(hic, limits = c(-3.5, -1))
 ```
+![Figure 7. Example of Hi-C map scale adjusted using the `limits` argument.](example_hic_map_scale_adjusted.png)
+
 
 ```{r}
 # choose a colour map using `cmap`, ?HiContacts::palettes will show list of available colour maps
@@ -115,6 +127,8 @@ plotMatrix(
     cmap = afmhotrColors()
 )
 ```
+![Figure 8. Example of Hi-C colour map adjusted.](example_hic_colour_map.png)
+
 ### Advanced visualization
 
 #### Overlaying topological features
@@ -144,6 +158,8 @@ borders
 ```{r}
 plotMatrix(hic, loops = loops, borders = borders)
 ```
+![Figure 9. Example of topological features for chromatin loops (off-diagonal circles) and borders (on-diagonal diamonds) on the Hi-C heatmap.](example_hic_advanced_visualization.png)
+
 
 #### Aggregated Hi-C maps
 
@@ -176,4 +192,4 @@ plotMatrix(
     cmap = bgrColors()
 )
 ```
-
+![Figure 10. Example of an aggregated Hi-C map of +/- 15kb around each chromatin loop in this sample used.](example_aggregated_hic_map.png)

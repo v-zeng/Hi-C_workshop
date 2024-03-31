@@ -211,6 +211,7 @@ plotMatrix(hic)
 ```
 
 ![](hi-c_data_visualization_R_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![Figure 1. Example contact matrix](example_single_map.png)
 
 #### Horizontal map
 
@@ -222,6 +223,8 @@ plotMatrix(hic, maxDistance = 200000)
 ```
 
 ![](hi-c_data_visualization_R_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![Figure 2. Example horizontal style Hi-C
+map.](sample_horizontalmap.png)
 
 #### Side-by-side maps
 
@@ -247,6 +250,8 @@ plotMatrix(hic, compare.to = hic2)
 ```
 
 ![](hi-c_data_visualization_R_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![Figure 3. Example side-by-side Hi-C samples
+map.](side_by_side_map.png)
 
 #### Plot multiple chromosomes
 
@@ -264,6 +269,7 @@ plotMatrix(full_hic)
 ```
 
 ![](hi-c_data_visualization_R_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![Figure 4. Example full contact matrix parse.](multiple_chrom_plot.png)
 
 Steps 2 and 3.
 
@@ -274,6 +280,8 @@ plotMatrix(hic_subset)
 ```
 
 ![](hi-c_data_visualization_R_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![Figure 5. Example subset Hi-C heatmap with chromosomes of
+interest.](multiple_chrom_interest_plot.png)
 
 ### Hi-C maps customization options
 
@@ -299,6 +307,8 @@ plotMatrix(hic, use.scores = 'count')
 ```
 
 ![](hi-c_data_visualization_R_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![Figure 6. Example of Hi-C map with un-normalized raw contact
+counts.](hic_map_scores_example.png)
 
 ``` r
 # choose a scale by providing the `limits` argument
@@ -306,6 +316,8 @@ plotMatrix(hic, limits = c(-3.5, -1))
 ```
 
 ![](hi-c_data_visualization_R_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![Figure 7. Example of Hi-C map scale adjusted using the `limits`
+argument.](example_hic_map_scale_adjusted.png)
 
 ``` r
 # choose a colour map using `cmap`, ?HiContacts::palettes will show list of available colour maps
@@ -325,7 +337,10 @@ plotMatrix(
 ```
 
 ![](hi-c_data_visualization_R_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
-\### Advanced visualization
+![Figure 8. Example of Hi-C colour map
+adjusted.](example_hic_colour_map.png)
+
+### Advanced visualization
 
 #### Overlaying topological features
 
@@ -396,6 +411,9 @@ plotMatrix(hic, loops = loops, borders = borders)
 ```
 
 ![](hi-c_data_visualization_R_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![Figure 9. Example of topological features for chromatin loops
+(off-diagonal circles) and borders (on-diagonal diamonds) on the Hi-C
+heatmap.](example_hic_advanced_visualization.png)
 
 #### Aggregated Hi-C maps
 
@@ -486,3 +504,5 @@ plotMatrix(
 ```
 
 ![](hi-c_data_visualization_R_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![Figure 10. Example of an aggregated Hi-C map of +/- 15kb around each
+chromatin loop in this sample used.](example_aggregated_hic_map.png)
